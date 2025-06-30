@@ -1,0 +1,68 @@
+.logo-video2img {
+    width: 150px;
+    cursor: pointer;
+}
+
+
+nav ul {
+    list-style: none;
+    width: 100%;
+    text-align: right;
+    gap: 20px;
+    padding: 0 60px 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 10px 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+nav ul li a {
+    position: relative;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 4px 0;
+    color: black;
+  }
+
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background-color: var(--gray); 
+    transition: width 0.3s ease-in-out;
+  }
+  
+nav ul li a:hover::after {
+    width: 100%;
+    left: 0;
+    right: auto; 
+}
+
+.btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border: 0;
+    outline: 0;
+    border-radius: 5px;
+    background: var(--yellow);
+    color: black;
+    font-weight: 700;
+}
+
+.btn:hover{
+    background: var(--yellow-dark);
+}
+
+.btn img {
+    width: 25px;
+    margin: 0 10px;
+}
