@@ -4,7 +4,24 @@
     secondaryBtnText="Signup Now"
 
 >
-    <form>
-        <p>TESTE</p>
+    <form [formGroup]="loginForm">
+        <app-primary-input
+            formControlName="email"
+            inputName="email"
+            type="email"
+            label="Email Address"
+            placeholder="you@example.com"
+        >
+            <img  src="/assets/icon/email.png"/>
+        </app-primary-input>
+        <app-primary-input
+            inputName="password"
+            type="text"
+            label="Password"
+            placeholder="Enter your password"
+        >
+        <img  src="/assets/icon/lock.png"/>
+    </app-primary-input>
+    <span>Forgot password?</span>
     </form>
 </app-default-login-layout>
