@@ -1,0 +1,57 @@
+<app-default-login-layout
+    title="Sign in and start!"
+    primaryBtnText="Signup Now"
+    secondaryBtnText="Login"
+    (submit)="submit()"
+    (navigate)="navigate()"
+    [disablePrimaryBtn]="!signupForm.valid"
+
+>
+    <form [formGroup]="signupForm">
+        <app-primary-input
+            formControlName="firstName"
+            inputName="firstName"
+            type="text"
+            label="Your first name"
+            placeholder="ex.: John"
+        >
+            <img  src="/assets/icon/user.png"/>
+        </app-primary-input>
+        <app-primary-input
+            formControlName="lastName"
+            inputName="lastName"
+            type="text"
+            label="Your last name"
+            placeholder="ex.: Silva"
+        >
+            <img  src="/assets/icon/user.png"/>
+        </app-primary-input>
+        <app-primary-input
+            formControlName="email"
+            inputName="email"
+            type="email"
+            label="Email address"
+            placeholder="you@example.com"
+        >
+            <img  src="/assets/icon/email.png"/>
+        </app-primary-input>
+        <app-primary-input
+            formControlName="password"
+            inputName="password"
+            type="password"
+            label="Password"
+            placeholder="Enter your password"
+        >
+        <img  src="/assets/icon/lock.png"/>
+        </app-primary-input>
+        <app-primary-input
+            formControlName="passwordConfirm"
+            inputName="passwordConfirm"
+            type="password"
+            label="Confirm your password"
+            placeholder="Repeat your password"
+        >
+        <img  src="/assets/icon/lock.png"/>
+        </app-primary-input>
+    </form>
+</app-default-login-layout>
