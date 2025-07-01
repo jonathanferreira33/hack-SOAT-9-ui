@@ -80,6 +80,10 @@ main {
                 padding: 12px 24px;
                 cursor: pointer;
 
+                &:disabled {
+                    opacity: .8;
+                }
+
                 &.bnt-primary{
                     background-color: $yellow-dark;
                     box-shadow: $box-shadow;

@@ -2,6 +2,9 @@
     title="Login into your account"
     primaryBtnText="Login Now"
     secondaryBtnText="Signup Now"
+    (submit)="submit()"
+    (navigate)="navigate()"
+    [disablePrimaryBtn]="!loginForm.valid"
 
 >
     <form [formGroup]="loginForm">
@@ -15,8 +18,9 @@
             <img  src="/assets/icon/email.png"/>
         </app-primary-input>
         <app-primary-input
+            formControlName="password"
             inputName="password"
-            type="text"
+            type="password"
             label="Password"
             placeholder="Enter your password"
         >
