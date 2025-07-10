@@ -1,12 +1,23 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 export const routes: Routes = [
-    {
-        path: "login", component: LoginComponent
-    },
-    {
-        path: "signup", component: SignupComponent
-    }
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent)
+  },
+  {
+    path: 'signup',
+    loadComponent: () => import('./pages/signup/signup.component').then(m => m.SignupComponent)
+  },
+  {
+    path: 'video-processor',
+    loadComponent: () => import('./pages/video-processor/video-processor.component').then(m => m.VideoProcessorComponent),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'processed-videos',
+    loadComponent: () => import('./pages/processed-videos/processed-videos.component').then(m => m.ProcessedVideosComponent),
+    canActivate: [AuthGuard]
+  },
 ];

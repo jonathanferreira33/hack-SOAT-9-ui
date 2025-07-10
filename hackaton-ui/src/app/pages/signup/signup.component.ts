@@ -5,6 +5,7 @@ import { PrimaryInputComponent } from '../../components/primary-input/primary-in
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
+import { RegisterService } from '../../services/register.service';
 
 interface signupForm {
   name: FormControl,
@@ -31,7 +32,7 @@ export class SignupComponent {
 
   constructor(
     private router: Router,
-    private loginService: LoginService,
+    private registerService: RegisterService,
     private toastr: ToastrService
   ) {
 
@@ -45,10 +46,13 @@ export class SignupComponent {
   }
 
   submit() {
-    this.loginService.login(this.signupForm.value.email, this.signupForm.value.password)
+    this.registerService.register(this.signupForm.value.firstName, this.signupForm.value.lastName, this.signupForm.value.email, this.signupForm.value.password)
       .subscribe({
-        next: () => this.toastr.success("login ok"),
-        error: () => this.toastr.error("login nok")
+          next: () => {
+          this.toastr.success("register ok")
+          this.router.navigate(['/video-processor']);
+        },
+        error: () => this.toastr.error("register nok")
       });
   }
 

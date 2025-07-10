@@ -35,9 +35,12 @@ export class LoginComponent {
   }
 
   submit() {
-    this.loginService.login(this.loginForm.value.email, this.loginForm.value.password)
+    return this.loginService.login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe({
-        next: () => this.toastr.success("login ok"),
+        next: () => {
+          this.toastr.success("login ok")
+          this.router.navigate(['/video-processor']);
+        },
         error: () => this.toastr.error("login nok")
       });
   }

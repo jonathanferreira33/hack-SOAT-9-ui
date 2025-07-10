@@ -1,0 +1,13 @@
+<nav class="navbar">
+  <div class="logo">🎬 <strong>FIAP X</strong></div>
+
+  <ul class="nav-links">
+    <li><a routerLink="/video-processor">Processar Vídeo</a></li>
+    <li><a routerLink="/processed-videos">Vídeos Processados</a></li>
+  </ul>
+
+  <div class="user-info">
+    <img [src]="userIconUrl" alt="User Icon" class="user-icon" />
+    <span>{{ username }}</span>
+  </div>
+</nav>
