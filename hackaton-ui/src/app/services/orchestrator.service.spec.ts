@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { VideoHistoryService } from './video-processor.service';
+import { OrchestratorService } from './orchestrator.service';
 
-describe('VideoProcessorService', () => {
-  let service: VideoHistoryService;
+describe('OrchestratorService', () => {
+  let service: OrchestratorService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(VideoHistoryService);
+    service = TestBed.inject(OrchestratorService);
   });
 
   it('should be created', () => {

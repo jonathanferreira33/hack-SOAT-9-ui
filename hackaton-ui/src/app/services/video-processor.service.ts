@@ -2,24 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { VideoProcessingEventResponse } from '../types/video-processing-event.type';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VideoProcessorService {
+export class VideoHistoryService {
 
+  private baseUrl = 'http://localhost:8081/api/v1/processing-events';
+  
   constructor(private http: HttpClient) {}
 
-  uploadVideo(formData: FormData): Observable<any> {
-    return this.http.post<any>('/upload', formData).pipe(
-      catchError(this.handleError)
-    );
-  }
 
-  getStatus(): Observable<any> {
-    return this.http.get<any>('/api/status').pipe(
-      catchError(this.handleError)
-    );
+  getEventsByUser(userId: string): Observable<VideoProcessingEventResponse[]> {
+    return this.http.get<VideoProcessingEventResponse[]>(`${this.baseUrl}/user/${userId}`);
   }
 
   private handleError(error: HttpErrorResponse) {

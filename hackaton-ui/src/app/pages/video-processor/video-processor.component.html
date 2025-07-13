@@ -43,10 +43,11 @@
                     <td>{{ file.date }}</td>
                     <td>
                         <span class="status-indicator" [ngClass]="{
-              'status-success': file.status === 'success',
-              'status-processing': file.status === 'processing',
-              'status-error': file.status === 'error'
-            }"></span>
+                            'status-success': file.status === 'success',
+                            'status-processing': file.status === 'processing',
+                            'status-error': file.status === 'error'
+                        }">
+                        </span>
                         {{ file.status === 'success' ? 'Concluído' : file.status === 'processing' ? 'Em andamento' :
                         'Erro' }}
                     </td>
