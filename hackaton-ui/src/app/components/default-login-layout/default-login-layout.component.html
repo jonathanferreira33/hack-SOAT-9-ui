@@ -1,0 +1,26 @@
+<main>
+    <section class="form-sec">
+        <!-- <img src="/assets/img/logo-video2img.png" alt="Logo Video 2 Image"> -->
+        <h1>🎬 FIAP X</h1>
+        <h2> {{ title }}</h2>
+        <ng-content #name></ng-content>
+        
+        <div class="btn-wrapper">
+            <button 
+            class="bnt-primary" 
+            (click)="submit()"
+            [disabled]="disablePrimaryBtn"
+            >
+                {{ primaryBtnText }}</button>
+            <div class="divider">
+                <div></div>
+                <span>or</span>
+                <div></div>
+            </div>
+            <button class="bnt-secondary" (click)="navigateRegister()"> {{ secondaryBtnText }}</button>
+        </div>
+    </section>
+    <section class="main-sec">
+        <img src="/assets/img/img_site.png" alt="">
+    </section>
+</main>

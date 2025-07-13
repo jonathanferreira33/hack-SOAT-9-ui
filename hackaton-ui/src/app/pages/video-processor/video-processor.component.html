@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+<div class="processor-wrapper">
+    <div class="container-processor">
+        <h1>🎬 FIAP X - Processador de Vídeos</h1>
+        <p style="text-align: center; color: #666;">
+            Faça upload de um vídeo e receba um ZIP com todos os frames extraídos!
+        </p>
+
+        <form id="uploadForm" class="upload-form">
+            <p><strong>Selecione um arquivo de vídeo:</strong></p>
+            <input type="file" id="videoFile" accept="video/*" required>
+            <br>
+            <button type="submit">🚀 Processar Vídeo</button>
+        </form>
+
+        <div class="loading" id="loading">
+            <p>⏳ Processando vídeo... Isso pode levar alguns minutos.</p>
+        </div>
+
+        <div class="result" id="result"></div>
+
+    </div>
+
+
+    <div class="processed-files-box">
+        <h2>📁 Arquivos Processados</h2>
+
+        <!-- loading -->
+        <div *ngIf="isLoadingMock">Carregando arquivos processados...</div>
+
+        <!-- tabela -->
+        <table class="processed-table" *ngIf="!isLoadingMock && mockProcessedFiles.length > 0">
+            <thead>
+                <tr>
+                    <th>Nome do Arquivo</th>
+                    <th>Data de Upload</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let file of mockProcessedFiles">
+                    <td>{{ file.name }}</td>
+                    <td>{{ file.date }}</td>
+                    <td>
+                        <span class="status-indicator" [ngClass]="{
+                            'status-success': file.status === 'success',
+                            'status-processing': file.status === 'processing',
+                            'status-error': file.status === 'error'
+                        }">
+                        </span>
+                        {{ file.status === 'success' ? 'Concluído' : file.status === 'processing' ? 'Em andamento' :
+                        'Erro' }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div *ngIf="!isLoadingMock && mockProcessedFiles.length === 0">
+            Nenhum arquivo encontrado.
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+@import "../../../variables.scss";
+
+main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    section {
+        height: 100%;
+        display: flex ;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-sec {
+        gap: 10px;
+
+        flex-grow: 1;
+
+        background-color: $yellow-light;
+
+        img {
+            width: 600px;
+        }
+    }
+
+    .form-sec {
+        flex-grow: 0.3;
+        padding: 0 40px;
+
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 80px;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        img {
+            width: 200px;
+            margin-bottom: 25px;
+        }
+
+        .btn-wrapper {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+
+            .divider {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                gap: 20px;
+                color: $gray;
+
+                font-size: 12px;
+                font-weight: 300;
+                text-transform: uppercase;
+            
+                div {
+                    flex-grow: 1;
+                    height: 2px;
+                    background-color: $gray-light;
+                }
+
+            }
+
+            button {
+                width: 100%;
+                border-radius: 2px;
+                font-size: 16px;
+                font-weight: 500;
+                border: none;
+                background: transparent;
+                padding: 12px 24px;
+                cursor: pointer;
+
+                &:disabled {
+                    opacity: .8;
+                }
+
+                &.bnt-primary{
+                    background-color: $yellow-dark;
+                    box-shadow: $box-shadow;
+                }
+
+                &.bnt-secondary {
+                    border: 3px solid $yellow-dark;
+                }
+            }
+
+        }
+    }
+}
