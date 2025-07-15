@@ -38,10 +38,10 @@ export class LoginComponent {
     return this.loginService.login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe({
         next: () => {
-          this.toastr.success("login ok")
+          this.toastr.success("LOGIN REALIZADO COM SUCESSO")
           this.router.navigate(['/video-processor']);
         },
-        error: () => this.toastr.error("login nok")
+        error: () => this.toastr.error("USUARIO NÃO ENCONTRADO")
       });
   }
 

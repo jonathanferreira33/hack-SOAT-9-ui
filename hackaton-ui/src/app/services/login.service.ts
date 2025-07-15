@@ -17,8 +17,8 @@ export class LoginService {
       .pipe(
         tap((value) => {
           sessionStorage.setItem("auth-token", value.token)
-          sessionStorage.setItem("username", value.username)
-          sessionStorage.setItem("userID", value.username)
+          sessionStorage.setItem("username", value.userName)
+          sessionStorage.setItem("userID", value.userID)
         })
       )
   }

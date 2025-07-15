@@ -49,10 +49,10 @@ export class SignupComponent {
     this.registerService.register(this.signupForm.value.firstName, this.signupForm.value.lastName, this.signupForm.value.email, this.signupForm.value.password)
       .subscribe({
           next: () => {
-          this.toastr.success("register ok")
-          this.router.navigate(['/video-processor']);
+          this.toastr.success("USUARIO REGISTRADO COM SUCESSO");
+          // this.router.navigate(['/video-processor']);
         },
-        error: () => this.toastr.error("register nok")
+        error: () => this.toastr.error("ERRO AO REGISTRAR USUARIO")
       });
   }
 

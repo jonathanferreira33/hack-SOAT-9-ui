@@ -7,6 +7,7 @@ import { ProcessorHistoryResponse } from '../../types/processor-history.type';
 import { CommonModule } from '@angular/common';
 import { VideoProcessingEventResponse, VideoProcessorEventRequest } from '../../types/video-processing-event.type';
 import { OrchestratorService } from '../../services/orchestrator.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -32,7 +33,8 @@ export class VideoProcessorComponent implements OnInit, AfterViewInit{
     private http: HttpClient,
     private sanitizer: DomSanitizer,
     private service: VideoHistoryService,
-    private serviceOrchestrator: OrchestratorService
+    private serviceOrchestrator: OrchestratorService,
+    private toastr: ToastrService
   ) {}
   
   ngAfterViewInit(): void {
@@ -49,24 +51,26 @@ export class VideoProcessorComponent implements OnInit, AfterViewInit{
         error: (err) => console.error('Erro ao buscar eventos:', err)
       });
     } else {
-      alert('Usuário não autenticado. Por favor, faça login.');
+      alert('ERRO AO PROCESSAR VÍDEO');
       // ou redirecionar para login
     }
     this.isLoadingMock = true;
   }
 
-  onSubmit(form: HTMLFormElement, fileInput: HTMLInputElement): void {
+  onSubmit(event: Event, fileInput: HTMLInputElement): void {
+    console.log('Form submitted');
+    event.preventDefault();
     const files = fileInput.files;
 
       if (!files || files.length === 0) {
-        this.showResult('Selecione pelo menos um arquivo de vídeo!', 'error');
+        this.toastr.error('Selecione pelo menos um arquivo de vídeo!', 'error');
         return;
       }
 
       this.showLoading(true);
       this.hideResult();
 
-      const user = localStorage.getItem('user') || 'default_user';
+      const user = localStorage.getItem('username') || 'default_user';
       const events = Array.from(files).map(file => ({
         videoPath: `/videos/${file.name}`,
         videoName: file.name,
@@ -77,67 +81,28 @@ export class VideoProcessorComponent implements OnInit, AfterViewInit{
      if (events.length === 1) {
       this.serviceOrchestrator.processSingle(events[0]).subscribe({
         next: response => {
-          this.showResult(response, 'success');
           this.showLoading(false);
+          this.toastr.success('Vídeo enviado para a fila de processamento com sucesso!');
         },
         error: err => {
-          this.showResult('Erro ao processar vídeo.', 'error');
           this.showLoading(false);
+          this.toastr.error('Erro ao processar vídeo.');
         }
-      });
+        });
       } else {
         this.serviceOrchestrator.processBatch(events).subscribe({
           next: response => {
-            this.showResult(response, 'success');
             this.showLoading(false);
+            this.toastr.success('Vídeos enviados para a fila de processamento com sucesso!');
           },
           error: err => {
-            this.showResult('Erro ao processar vídeos em lote.', 'error');
             this.showLoading(false);
+            this.toastr.error('Erro ao processar vídeos em lote.');
           }
-        });
-      }
-
+      });
+    }
   }
 
-  sendSingleVideo() {
-    const event: VideoProcessorEventRequest = {
-      videoPath: '/videos/sample1.mp4',
-      videoName: 'sample1.mp4',
-      outputDir: '/outputs/sample1',
-      user: localStorage.getItem('user') || 'default_user'
-    };
-
-    this.serviceOrchestrator.processSingle(event).subscribe(response => {
-      console.log('Resposta:', response);
-    });
-  }
-
-  sendBatchVideos() {
-    const events: VideoProcessorEventRequest[] = [
-      {
-        videoPath: '/videos/sample2.mp4',
-        videoName: 'sample2.mp4',
-        outputDir: '/outputs/sample2',
-        user: localStorage.getItem('userID') || 'default_user'
-      },
-      {
-        videoPath: '/videos/sample3.mp4',
-        videoName: 'sample3.mp4',
-        outputDir: '/outputs/sample3',
-        user: localStorage.getItem('userID') || 'default_user'
-      }
-    ];
-
-    this.serviceOrchestrator.processBatch(events).subscribe(response => {
-      console.log('Resposta em lote:', response);
-    });
-  }
-
-  showResult(message: string, type: string): void {
-    this.resultMessage = message;
-    this.resultClass = `result ${type}`;
-  }
 
   hideResult(): void {
     this.resultMessage = '';

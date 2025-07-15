@@ -13,6 +13,7 @@ export class OrchestratorService {
   constructor(private http: HttpClient) {}
 
   processSingle(event: VideoProcessorEventRequest): Observable<string> {
+    console.log('Processing single event:', event);
     return this.http.post(`${this.apiUrl}/process`, event, { responseType: 'text' });
   }
 

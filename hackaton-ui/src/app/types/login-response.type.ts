@@ -1,5 +1,5 @@
 export type LoginResponse = {
     token: string;
-    username: string;
+    userName: string;
     userID: string;
 }
