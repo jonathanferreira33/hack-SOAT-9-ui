@@ -16,8 +16,8 @@ export class RegisterService {
     return this.httpClient.post<LoginResponse>(this.apiUrl, {firstName, surname, email, password})
       .pipe(
         tap((value) => {
-          sessionStorage.setItem("auth-token", value.token)
-          sessionStorage.setItem("username", value.username)
+          // sessionStorage.setItem("auth-token", value.token)
+          // sessionStorage.setItem("username", value.username)
         })
       )
   }

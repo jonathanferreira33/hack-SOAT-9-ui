@@ -6,9 +6,10 @@
             Faça upload de um vídeo e receba um ZIP com todos os frames extraídos!
         </p>
 
-        <form id="uploadForm" class="upload-form">
+        <form id="uploadForm" class="upload-form" (submit)="onSubmit($event, videoFile)">
+
             <p><strong>Selecione um arquivo de vídeo:</strong></p>
-            <input type="file" id="videoFile" accept="video/*" required>
+            <input type="file" id="videoFile" #videoFile accept="video/*" multiple required>
             <br>
             <button type="submit">🚀 Processar Vídeo</button>
         </form>
@@ -25,10 +26,8 @@
     <div class="processed-files-box">
         <h2>📁 Arquivos Processados</h2>
 
-        <!-- loading -->
         <div *ngIf="isLoadingMock">Carregando arquivos processados...</div>
 
-        <!-- tabela -->
         <table class="processed-table" *ngIf="!isLoadingMock && mockProcessedFiles.length > 0">
             <thead>
                 <tr>
@@ -43,10 +42,10 @@
                     <td>{{ file.date }}</td>
                     <td>
                         <span class="status-indicator" [ngClass]="{
-                            'status-success': file.status === 'success',
-                            'status-processing': file.status === 'processing',
-                            'status-error': file.status === 'error'
-                        }">
+              'status-success': file.status === 'success',
+              'status-processing': file.status === 'processing',
+              'status-error': file.status === 'error'
+            }">
                         </span>
                         {{ file.status === 'success' ? 'Concluído' : file.status === 'processing' ? 'Em andamento' :
                         'Erro' }}
