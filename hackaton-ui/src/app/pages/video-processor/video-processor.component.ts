@@ -69,6 +69,7 @@ export class VideoProcessorComponent implements OnInit, AfterViewInit{
 
       this.showLoading(true);
       this.hideResult();
+      
 
       const user = localStorage.getItem('username') || 'default_user';
       const events = Array.from(files).map(file => ({
@@ -77,6 +78,14 @@ export class VideoProcessorComponent implements OnInit, AfterViewInit{
         outputDir: `/outputs/${file.name.replace(/\.[^/.]+$/, '')}`,
         user: user
       }));
+
+      this.mockProcessedFiles = events.map(event => ({
+        name: event.videoName,
+        date: new Date().toLocaleString(),
+        status: 'processing'
+      }));
+
+      this.isLoadingMock = false;
 
      if (events.length === 1) {
       this.serviceOrchestrator.processSingle(events[0]).subscribe({
